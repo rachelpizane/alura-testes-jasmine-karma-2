@@ -55,7 +55,7 @@ describe('PhotoFrameComponent', () => {
     expect(times).toBe(2);
   }));
 
-  it(`Should display number of likes when (@Input likes) is incremented`, () => {
+  it(`(D) Should display number of likes when (@Input likes) is incremented`, () => {
     component.likes++;
     fixture.detectChanges(); // Atualiza a visualização após a mudança de valor
 
@@ -69,7 +69,7 @@ describe('PhotoFrameComponent', () => {
     // O trim() é usado para remover espaços em branco no início e no final do texto. Sem isso, o teste falharia. (Error: Expected ' 1 ' to be '1')
   });
 
-  it(`Should update aria-label when (@Input likes is incremented)`, () => {
+  it(`(D) Should update aria-label when (@Input likes is incremented)`, () => {
     component.likes++;
     fixture.detectChanges();
 
@@ -79,9 +79,23 @@ describe('PhotoFrameComponent', () => {
     // .getAttribute() é usado para obter o valor de um atributo no elemento DOM. Nessa caso, estamos obtendo o valor do atributo aria-label
   });
 
-  it(`Should have aria-label with default (@Input likes) value (0)`, () => {
+  it(`(D) Should have aria-label with default (@Input likes) value (0)`, () => {
     const element: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
 
     expect(element.getAttribute('aria-label')).toBe('0: people liked');
+  });
+
+  it(`(D) Should display image with src and description when bound to properties`, () => {
+    const imageUrl: string = 'https://example.com/image.jpg';
+    const description: string = 'A beautiful image';
+
+    component.imageUrl = imageUrl;
+    component.description = description;
+    fixture.detectChanges();
+
+    const imgElement: HTMLImageElement = fixture.nativeElement.querySelector('img');
+
+    expect(imgElement.getAttribute('src')).toBe(imageUrl);
+    expect(imgElement.getAttribute('alt')).toBe(description);
   });
 });
