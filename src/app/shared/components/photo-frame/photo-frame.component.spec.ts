@@ -1,6 +1,8 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { PhotoFrameComponent } from './photo-frame.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LikeWidgetComponent } from '../like-widget/like-widget.component';
 
 describe('PhotoFrameComponent', () => {
   let component: PhotoFrameComponent;
@@ -8,7 +10,8 @@ describe('PhotoFrameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhotoFrameComponent ]
+      declarations: [PhotoFrameComponent , LikeWidgetComponent],
+      imports: [FontAwesomeModule]
     })
     .compileComponents();
   });
@@ -51,4 +54,18 @@ describe('PhotoFrameComponent', () => {
 
     expect(times).toBe(2);
   }));
+
+  it(`Should display number of likes when (@Input likes) is incremented`, () => {
+    component.likes++;
+    fixture.detectChanges(); // Atualiza a visualização após a mudança de valor
+    
+    const element: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
+    // O fixture.nativeElement é o elemento DOM do componente
+    // O querySelector é usado para selecionar o elemento DOM que contém o número de likes
+    // O .like-counter é a classe CSS que foi adicionada ao elemento DOM no template do componente
+
+    expect(element.textContent.trim()).toBe('1');
+    // Verifica se o texto do elemento DOM é igual a 1
+    // O trim() é usado para remover espaços em branco no início e no final do texto. Sem isso, o teste falharia. (Error: Expected ' 1 ' to be '1')
+  });
 });
