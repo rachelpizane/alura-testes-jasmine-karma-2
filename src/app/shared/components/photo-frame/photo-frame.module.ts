@@ -5,11 +5,11 @@ import { NgModule } from '@angular/core';
 import { LikeWidgetModule } from '../like-widget/like-widget.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [PhotoFrameComponent],
   imports: [
     CommonModule,
     LikeWidgetModule
   ],
-  exports: [],
+  exports: [PhotoFrameComponent],
 })
 export class PhotoFrameModule {}

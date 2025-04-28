@@ -1,7 +1,4 @@
-<app-photo-frame
-  imageUrl="https://picsum.photos/200/300"
-  description="Alguma descriçãao"
-  [likes]="likes"
-  (liked)="like()"
+<app-photo-board
+  [photos]="photos$ | async "
 >
-</app-photo-frame>
+</app-photo-board>

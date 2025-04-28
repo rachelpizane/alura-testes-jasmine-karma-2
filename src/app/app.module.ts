@@ -5,16 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LikeWidgetModule } from './shared/components/like-widget/like-widget.module';
 import { PhotoFrameComponent } from './shared/components/photo-frame/photo-frame.component';
+import { PhotoFrameModule } from './shared/components/photo-frame/photo-frame.module';
+import { PhotoBoardmodule } from './shared/components/photo-board/photo-board.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PhotoFrameComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LikeWidgetModule
+    LikeWidgetModule,
+    PhotoFrameModule,
+    PhotoBoardmodule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
