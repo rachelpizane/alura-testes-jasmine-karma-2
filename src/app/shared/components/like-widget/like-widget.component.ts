@@ -22,7 +22,6 @@ export class LikeWidgetComponent implements OnInit {
   }
 
   public like(): void {
-    console.log('LikeWidgetComponent: like() called');
     this.liked.emit();
   }
 

@@ -27,7 +27,6 @@ export class PhotoBoardComponent implements OnChanges {
         newRows.push(photos.slice(index, index + step));
       }
     }
-    console.log(newRows);
     return newRows;
   }
 }
