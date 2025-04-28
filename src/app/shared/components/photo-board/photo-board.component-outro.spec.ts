@@ -8,7 +8,8 @@ import { PhotoBoardmodule } from './photo-board.module';
 
 function buildPhotoList(): Photo[] {
   const photos: Photo[] = [];
-  for (let i = 0; i < 8; i++) {
+  const lengthPhotos = 8
+  for (let i = 0; i < lengthPhotos; i++) {
     photos.push({
       id: i + 1,
       url: '',
@@ -19,41 +20,37 @@ function buildPhotoList(): Photo[] {
 }
 
 describe(PhotoBoardComponent.name + ' outros', () => {
-  let fixture: ComponentFixture<PhotoBoardTestComponent>;
-  let component: PhotoBoardTestComponent;
+  let fixture: ComponentFixture<PhotoBoardComponent>;
+  let component: PhotoBoardComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PhotoBoardTestComponent],
+      declarations: [PhotoBoardComponent],
       imports: [PhotoBoardmodule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PhotoBoardTestComponent);
+    fixture = TestBed.createComponent(PhotoBoardComponent);
     component = fixture.componentInstance;
   });
 
   it(`Should display rows and columns when (@Input photos) has value`, () => {
     component.photos = buildPhotoList();
+
+    const changeMock: SimpleChanges = {
+      photos: new SimpleChange(null, component.photos, true)
+    };
+
+    component.ngOnChanges(changeMock);
+
     fixture.detectChanges();
-    expect(component.board.rows.length)
+    expect(component.rows.length)
       .withContext('Number of rows')
       .toBe(2);
-    expect(component.board.rows[0].length)
+    expect(component.rows[0].length)
       .withContext('Number of columns from the first row')
       .toBe(4);
-    expect(component.board.rows[1].length)
+    expect(component.rows[1].length)
       .withContext('Number of columns from the second row')
       .toBe(4);
   });
 });
-
-@Component({
-  template: `
-    <app-photo-board [photos]="photos">
-    </app-photo-board>
-  `
-})
-class PhotoBoardTestComponent {
-  @ViewChild(PhotoBoardComponent) public board: PhotoBoardComponent;
-  public photos: Photo[] = [];
-}
