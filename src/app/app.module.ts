@@ -8,6 +8,7 @@ import { PhotoFrameComponent } from './shared/components/photo-frame/photo-frame
 import { PhotoFrameModule } from './shared/components/photo-frame/photo-frame.module';
 import { PhotoBoardmodule } from './shared/components/photo-board/photo-board.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PhotoListModule } from './container/photo-list/photo-list.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LikeWidgetModule,
-    PhotoFrameModule,
-    PhotoBoardmodule,
-    HttpClientModule
+    HttpClientModule,
+    PhotoListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
