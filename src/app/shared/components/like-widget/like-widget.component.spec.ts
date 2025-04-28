@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { LikeWidgetComponent } from './like-widget.component';
 import { LikeWidgetModule } from './like-widget.module';
 
@@ -38,4 +38,31 @@ describe(LikeWidgetComponent.name, () => {
       component.like();
       expect(component.liked.emit).toHaveBeenCalled();
   });
+
+  it(`(D) Should display display number of likes when clicked`, done => {
+    component.liked.subscribe(() => {
+      component.likes++;
+      fixture.detectChanges(); // Atualiza a visualização após a mudança de valor
+      const likeCounterEl: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
+      expect(likeCounterEl.textContent.trim()).toBe('1');
+      done();
+    });
+
+    const LikeWidgetContainerEl: HTMLElement = fixture.nativeElement.querySelector('.like-widget-container');
+    LikeWidgetContainerEl.click(); // Para simula um eventos do DOM, é só chamar o evento como método.
+  })
+
+  it(`(D) Should display display number of likes when ENTER KEY is pressed`, done => {
+    component.liked.subscribe(() => {
+      component.likes++;
+      fixture.detectChanges(); // Atualiza a visualização após a mudança de valor
+      const likeCounterEl: HTMLElement = fixture.nativeElement.querySelector('.like-counter');
+      expect(likeCounterEl.textContent.trim()).toBe('1');
+      done();
+    });
+
+    const LikeWidgetContainerEl: HTMLElement = fixture.nativeElement.querySelector('.like-widget-container');
+    const event = new KeyboardEvent('keyup', { key: 'Enter' }); // Cria um evento de teclado simulando a tecla ENTER
+    LikeWidgetContainerEl.dispatchEvent(event) // Quando o evento não tem um método, usa-se o dispatchEvent para simular o evento do DOM. Seu parametro é o evento que queremos simular. No caso, o evento de teclado que criamos acima.
+  })
 });
