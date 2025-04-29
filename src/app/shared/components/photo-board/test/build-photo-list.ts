@@ -6,7 +6,7 @@ export function buildPhotoList(): Photo[] {
     photos.push({
       id: i + 1,
       url: '',
-      description: ''
+      description: 'example description ' + (i + 1),
     });
   }
   return photos;
